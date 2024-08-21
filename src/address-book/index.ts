@@ -1,4 +1,3 @@
-import { getFetcher } from '../common/fetch';
 import { padToBytes32 } from '../common/utils';
 import { IAddressBookOptions, UserInfo } from './type';
 
@@ -7,7 +6,7 @@ const RPC_OP_SEPOLIA = 'https://optimism-sepolia.blockpi.network/v1/rpc/public';
 const CONTRACT_ADDRESS = '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58';
 
 export default class AddressBook {
-  private rpc: string = RPC_OP;
+  private rpcs: string[] = [RPC_OP];
   private isTestnet = false;
   private contractAddress: string = CONTRACT_ADDRESS;
 
@@ -19,10 +18,13 @@ export default class AddressBook {
       this.isTestnet = options?.isTestnet;
     }
     if (options?.rpcUrl) {
-      this.rpc = options?.rpcUrl;
+      this.rpcs =
+        typeof options?.rpcUrl === 'string'
+          ? [options?.rpcUrl]
+          : options?.rpcUrl;
     } else {
       if (this.isTestnet) {
-        this.rpc = RPC_OP_SEPOLIA;
+        this.rpcs = [RPC_OP_SEPOLIA];
       }
     }
   }
@@ -48,8 +50,7 @@ export default class AddressBook {
       id: 1,
     };
 
-    const fetcher = await getFetcher();
-    const response = await fetcher(this.rpc, {
+    const response = await fetch(this.rpcs[0], {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

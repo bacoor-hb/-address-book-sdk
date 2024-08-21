@@ -1,5 +1,5 @@
 export type IAddressBookOptions = {
-  rpcUrl?: string;
+  rpcUrl?: string | string[];
   contractAddress?: string;
   isTestnet?: boolean;
 };

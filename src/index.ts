@@ -1,26 +1,29 @@
 export const welcome = (): string => 'Welcome to Address Book!';
 
 import AddressBook from './address-book';
-import { UserInfo } from './address-book/type';
+import { IAddressBookOptions, UserInfo } from './address-book/type';
 
 export const resolveByNickname = async (
-  nickname: string
+  nickname: string,
+  options?: IAddressBookOptions
 ): Promise<UserInfo | null> => {
-  const client = new AddressBook();
+  const client = new AddressBook(options);
   return await client.resolveByNickname(nickname);
 };
 
 export const resolveByAddress = async (
-  address: `0x${string}`
+  address: `0x${string}`,
+  options?: IAddressBookOptions
 ): Promise<UserInfo | null> => {
-  const client = new AddressBook();
+  const client = new AddressBook(options);
   return await client.resolveByAddress(address);
 };
 
 export const resolveByEmail = async (
-  email: string
+  email: string,
+  options?: IAddressBookOptions
 ): Promise<UserInfo | null> => {
-  const client = new AddressBook();
+  const client = new AddressBook(options);
   return await client.resolveByEmail(email);
 };
 
