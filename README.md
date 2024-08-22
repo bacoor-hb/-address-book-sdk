@@ -20,14 +20,14 @@ npm install @address-book/sdk
 import { resolveByNickname, resolveByAddress, resolveByEmail } from '@address-book/sdk';
 
 const info = resolveByNickname('0xVinny')
-// { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0' avatar: 'base64...', nickname: '0xVinny', freeText: '...' } 
+// { info: { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0' avatar: 'base64...', nickname: '0xVinny', freeText: '...' } , resolvedAt: '...', resolvedBy: 'nickname' } 
 ```
 
 ```ts
 import { resolveByAddress } from '@address-book/sdk';
 
 const info = resolveByAddress('0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0')
-// { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0', avatar: 'base64...', nickname: '0xVinny', freeText: '...' } 
+// { info: { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0', avatar: 'base64...', nickname: '0xVinny', freeText: '...' }, resolvedAt: '...', resolvedBy: 'address' } 
 ```
 
 
@@ -35,7 +35,7 @@ const info = resolveByAddress('0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0')
 import {  resolveByEmail } from '@address-book/sdk';
 
 const info = resolveByEmail('vinny@gmail.com')
-// { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0' avatar: 'base64...', email: 'vinny@gmail.com', freeText: '...' } 
+// { info: { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0' avatar: 'base64...', email: 'vinny@gmail.com', freeText: '...' }, resolvedAt: '...', resolvedBy: 'email' } 
 ```
 
 ## Advance
@@ -51,7 +51,7 @@ const client = new AddressBook({
 
 
 const info = client.resolveByNickname('0xVinny')
-// { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0' avatar: 'base64...', nickname: '0xVinny', freeText: '...' } 
+// { info: { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0' avatar: 'base64...', nickname: '0xVinny', freeText: '...' } , resolvedAt: '...', resolvedBy: 'nickname' } 
 ```
 
 ## API
@@ -64,7 +64,7 @@ Type: `object`
 
 ##### rpcUrl
 
-Type: `string`
+Type: `string | string[]` 
 Default: `https://optimism.llamarpc.com`
 
 ##### contractAddress

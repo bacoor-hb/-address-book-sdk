@@ -4,10 +4,26 @@ export type IAddressBookOptions = {
   isTestnet?: boolean;
 };
 
-export type UserInfo = {
-  address: string;
+export type AddressBookInfoWithNickname = {
+  address: `0x${string}`;
+  nickname: string;
   avatar?: string;
-  nickname?: string;
-  email?: string;
   freeText?: string;
+};
+
+export type AddressBookInfoWithEmail = {
+  address: `0x${string}`;
+  email: string;
+  avatar?: string;
+  freeText?: string;
+};
+
+export type AddressBookInfo =
+  | AddressBookInfoWithNickname
+  | AddressBookInfoWithEmail;
+
+export type AddressBookResolve = {
+  info: AddressBookInfo;
+  resolvedAt: Date;
+  resolvedBy: 'nickname' | 'address' | 'email';
 };
