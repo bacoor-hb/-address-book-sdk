@@ -70,7 +70,7 @@ Default: `https://optimism.llamarpc.com`
 ##### contractAddress
 
 Type: `string`
-Default: `0x94b008aA00579c1307B0EF2c499aD98a8ce58e58`
+Default: `0x32b4aED2b805dAb72c4bAD5807fE8bBae2934fcd`
 
 ##### isTestnet
 

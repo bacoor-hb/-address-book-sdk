@@ -15,7 +15,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   rules: {
-    'prettier/prettier': 'warn',
+    'prettier/prettier': 'off',
     'node/no-missing-import': 'off',
     'node/no-empty-function': 'off',
     'node/no-unsupported-features/es-syntax': 'off',
@@ -33,5 +33,6 @@ module.exports = {
     '@typescript-eslint/require-await': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
   },
 };
