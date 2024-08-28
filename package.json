@@ -1,13 +1,15 @@
 {
   "name": "@address-book/sdk",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The sdk package provides a simple and efficient way to resolve email addresses into their corresponding Ethereum addresses (0x) using the Address Book protocol. This SDK is designed to integrate seamlessly into decentralized applications (dApps) and blockchain-based systems, enabling developers to streamline the process of mapping emails to blockchain identities.",
   "main": "./lib/index.js",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build-dev": "tsc --project tsconfig.build.json",
+    "build": "esbuild src/index.ts --bundle --minify --outfile=lib/index.js",
+    "release": "node scripts/release.js",
     "clean": "rm -rf ./lib/",
     "lint": "eslint ./src/ --fix",
     "prepare": "husky install",
@@ -34,14 +36,17 @@
     "@types/node": "^12.20.11",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "esbuild": "0.23.1",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
+    "inquirer": "^10.1.8",
     "jest": "^27.2.0",
     "lint-staged": "^13.2.1",
     "prettier": "^2.2.1",
+    "shelljs": "^0.8.5",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "typescript": "^4.2.4"
