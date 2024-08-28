@@ -27,4 +27,6 @@ export const resolveByEmail = async (
   return await client.resolveByEmail(email);
 };
 
+export const AddressBookClient = AddressBook
+
 export default AddressBook;

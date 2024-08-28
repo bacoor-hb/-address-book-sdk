@@ -1,7 +1,14 @@
+export type CacheOptions = {
+  cacheTime?: number;
+  cacheCheckExists?: boolean;
+  cacheResolve?: boolean;
+}
+
 export type IAddressBookOptions = {
   rpcUrl?: string | string[];
   contractAddress?: string;
   isTestnet?: boolean;
+  cache?: CacheOptions
 };
 
 export type AddressBookInfoWithNickname = {
@@ -23,7 +30,10 @@ export type AddressBookInfo =
   | AddressBookInfoWithEmail;
 
 export type AddressBookResolve = {
-  info: AddressBookInfo;
-  resolvedAt: Date;
+  info: AddressBookInfo | null;
+  resolvedAt: number;
   resolvedBy: 'nickname' | 'address' | 'email';
 };
+export type ResolveOptions = {
+  forceRequest?: boolean;
+}
