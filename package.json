@@ -7,8 +7,7 @@
     "lib/**/*"
   ],
   "scripts": {
-    "build-dev": "tsc --project tsconfig.build.json",
-    "build": "esbuild src/index.ts --bundle --minify --outfile=lib/index.js",
+    "build": "tsc --project tsconfig.build.json",
     "release": "node scripts/release.js",
     "clean": "rm -rf ./lib/",
     "lint": "eslint ./src/ --fix",
@@ -36,7 +35,6 @@
     "@types/node": "^12.20.11",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
-    "esbuild": "0.23.1",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-node": "^11.1.0",
