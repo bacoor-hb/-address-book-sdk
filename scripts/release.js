@@ -31,7 +31,7 @@ inquirer.default
     const fs = require('fs');
     fs.writeFileSync('./package.json', JSON.stringify(package, null, 2));
     shelljs.exec('npm run clean');
-    shelljs.exec('npm run build');
+    shelljs.exec('npm run build-dev');
     shelljs.exec('git add .')
     shelljs.exec(`git commit -m "release v${nextVersion}"`);
     shelljs.exec(`npm publish --access public`)
