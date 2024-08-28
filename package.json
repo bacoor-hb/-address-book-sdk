@@ -1,6 +1,6 @@
 {
   "name": "@address-book/sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The sdk package provides a simple and efficient way to resolve email addresses into their corresponding Ethereum addresses (0x) using the Address Book protocol. This SDK is designed to integrate seamlessly into decentralized applications (dApps) and blockchain-based systems, enabling developers to streamline the process of mapping emails to blockchain identities.",
   "main": "./lib/index.js",
   "files": [

@@ -9,6 +9,7 @@ export type IAddressBookOptions = {
   contractAddress?: string;
   isTestnet?: boolean;
   cache?: CacheOptions
+  showLog?: boolean;
 };
 
 export type AddressBookInfoWithNickname = {

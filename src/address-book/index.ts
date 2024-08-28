@@ -32,6 +32,7 @@ export default class AddressBook {
     cacheCheckExists: false,
     cacheResolve: false,
   };
+  private showLog = false;
   private nicknameCache: Map<string, AddressBookResolve> = new Map();
   private emailCache: Map<string, AddressBookResolve> = new Map();
   private addressCache: Map<string, AddressBookResolve> = new Map();
@@ -61,6 +62,8 @@ export default class AddressBook {
         ...options.cache,
       };
     }
+
+    this.showLog = options?.showLog || false;
   }
 
   private async call(
@@ -98,7 +101,7 @@ export default class AddressBook {
       }
       return null;
     } catch (error) {
-      console.log(`Call error ${this.rpcs[currentRpc]}`, error);
+      this.showLog && console.log(`Call error ${this.rpcs[currentRpc]}`, error);
       if (currentRpc + 1 < this.rpcs.length) {
         return this.call(address, selector, params, currentRpc + 1);
       }
@@ -156,6 +159,10 @@ export default class AddressBook {
     this.contractAddress = address;
   }
 
+  public setShowLog(showLog: boolean) {
+    this.showLog = showLog;
+  }
+
   public async resolveByNickname(
     nickname: string,
     options?: ResolveOptions
@@ -174,7 +181,8 @@ export default class AddressBook {
         Date.now() - cachedData.resolvedAt <
           (this.cacheOptions.cacheTime || DEFAULT_CACHE_TIME)
       ) {
-        console.log(`Resolve nickname from cache for ${key}`);
+        this.showLog &&
+          console.log(`Resolve nickname from cache: ${key}`, cachedData);
         return cachedData;
       }
       this.nicknameCache.delete(key);
@@ -197,6 +205,8 @@ export default class AddressBook {
           resolvedBy: 'nickname',
         };
         this.nicknameCache.set(key, returnData);
+        this.showLog &&
+          console.log(`Resolve nickname from contract: ${key}`, returnData);
         return returnData;
       }
     }
@@ -222,7 +232,8 @@ export default class AddressBook {
         Date.now() - cachedData.resolvedAt <
           (this.cacheOptions.cacheTime || DEFAULT_CACHE_TIME)
       ) {
-        console.log(`Resolve email from cache for ${key}`);
+        this.showLog &&
+          console.log(`Resolve email from cache: ${key}`, cachedData);
         return cachedData;
       }
       this.emailCache.delete(key);
@@ -245,6 +256,8 @@ export default class AddressBook {
           resolvedBy: 'address',
         };
         this.emailCache.set(key, returnData);
+        this.showLog &&
+          console.log(`Resolve email from contract: ${key}`, returnData);
         return returnData;
       }
     }
@@ -271,7 +284,8 @@ export default class AddressBook {
         Date.now() - cachedData.resolvedAt <
           (this.cacheOptions.cacheTime || DEFAULT_CACHE_TIME)
       ) {
-        console.log(`Resolve address from cache for ${key}`);
+        this.showLog &&
+          console.log(`Resolve address from cache: ${key}`, cachedData);
         return cachedData;
       }
       this.addressCache.delete(key);
@@ -296,6 +310,8 @@ export default class AddressBook {
           resolvedBy: 'address',
         };
         this.addressCache.set(key, returnData);
+        this.showLog &&
+          console.log(`Resolve address from contract: ${key}`, returnData);
         return returnData;
       }
     }
@@ -316,17 +332,29 @@ export default class AddressBook {
         Date.now() - cachedData.resolvedAt <
           (this.cacheOptions.cacheTime || DEFAULT_CACHE_TIME)
       ) {
-        console.log(`Nick exist from cache for ${key}`);
+        this.showLog &&
+          console.log(
+            `Check nickname exist from cache: ${key}`,
+            !!cachedData.info
+          );
         return !!cachedData.info;
       } else {
         this.nicknameCache.delete(key);
       }
     }
     const infoData = await this.resolveByNickname(nickname, options);
+    this.showLog &&
+      console.log(
+        `Check nickname exist from contract: ${key}`,
+        !!infoData?.info
+      );
     return !!infoData?.info;
   }
 
-  public async isEmailExists(email: string, options?: ResolveOptions): Promise<boolean> {
+  public async isEmailExists(
+    email: string,
+    options?: ResolveOptions
+  ): Promise<boolean> {
     const key = email.toLowerCase();
     if (this.cacheOptions.cacheCheckExists && !options?.forceRequest) {
       const cachedData = this.emailCache.get(key);
@@ -335,17 +363,26 @@ export default class AddressBook {
         Date.now() - cachedData.resolvedAt <
           (this.cacheOptions.cacheTime || DEFAULT_CACHE_TIME)
       ) {
-        console.log(`Email exist from cache for ${key}`);
-        return !!cachedData.info;
+        this.showLog &&
+          console.log(
+            `Check email exist from cache: ${key}`,
+            !!cachedData?.info
+          );
+        return !!cachedData?.info;
       } else {
         this.emailCache.delete(key);
       }
     }
     const infoData = await this.resolveByEmail(email, options);
+    this.showLog &&
+      console.log(`Check email exist from contract: ${key}`, !!infoData?.info);
     return !!infoData?.info;
   }
 
-  public async isAddressExists(address: `0x${string}`, options?: ResolveOptions): Promise<boolean> {
+  public async isAddressExists(
+    address: `0x${string}`,
+    options?: ResolveOptions
+  ): Promise<boolean> {
     const key = address.toLowerCase();
     if (this.cacheOptions.cacheCheckExists && !options?.forceRequest) {
       const cachedData = this.addressCache.get(key);
@@ -354,13 +391,22 @@ export default class AddressBook {
         Date.now() - cachedData.resolvedAt <
           (this.cacheOptions.cacheTime || DEFAULT_CACHE_TIME)
       ) {
-        console.log(`Address exist from cache for ${key}`);
+        this.showLog &&
+          console.log(
+            `Check address exist from cache: ${key}`,
+            !!cachedData?.info
+          );
         return !!cachedData.info;
       } else {
         this.addressCache.delete(key);
       }
     }
     const infoData = await this.resolveByAddress(address, options);
+    this.showLog &&
+      console.log(
+        `Check address exist from contract: ${key}`,
+        !!infoData?.info
+      );
     return !!infoData?.info;
   }
 }
