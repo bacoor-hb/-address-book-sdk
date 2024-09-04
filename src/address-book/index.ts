@@ -19,7 +19,7 @@ const RPC_OP_SEPOLIA = [
 
 const CONTRACT_ADDRESS = {
   TESTNET: '0x32b4aED2b805dAb72c4bAD5807fE8bBae2934fcd',
-  MAINNET: '0x32b4aED2b805dAb72c4bAD5807fE8bBae2934fcd',
+  MAINNET: '0xca99eb8df6a77afbbc350e33cd73155fe13fef56',
 };
 
 const DEFAULT_CACHE_TIME = 5 * 60 * 1000; // 5 minute
