@@ -29,7 +29,7 @@
     "address",
     "protocol"
   ],
-  "homepage": "",
+  "homepage": "https://github.com/bacoor-hb/address-book-sdk",
   "devDependencies": {
     "@types/jest": "^27.5.2",
     "@types/node": "^12.20.11",
