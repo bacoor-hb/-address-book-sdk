@@ -38,7 +38,7 @@ const info = await resolveByEmail('vinny@gmail.com')
 // { info: { address: '0xeeC5915A21DA64a58DE1e9a3D7dd7b8Bff775cF0' avatar: 'base64...', email: 'vinny@gmail.com', freeText: '...' }, resolvedAt: '...', resolvedBy: 'email' } 
 ```
 
-## Advance
+## Advance (Recommend)
 
 ```ts
 import AddressBook from '@address-book/sdk';
